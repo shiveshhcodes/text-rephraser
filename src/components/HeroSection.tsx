@@ -2,9 +2,10 @@ import { useEffect, useRef } from 'react';
 
 interface HeroSectionProps {
   onInstallClick: () => void;
+  onTryWebVersion: () => void;
 }
 
-export function HeroSection({ onInstallClick }: HeroSectionProps) {
+export function HeroSection({ onInstallClick, onTryWebVersion }: HeroSectionProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -23,10 +24,6 @@ export function HeroSection({ onInstallClick }: HeroSectionProps) {
     }
   }, []);
 
-  const handleTryWebVersion = () => {
-    // Scroll down or trigger navigation to main app
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-  };
 
   return (
     <div ref={heroRef} className="relative min-h-screen flex items-center justify-center bg-glow overflow-hidden">
@@ -84,7 +81,7 @@ export function HeroSection({ onInstallClick }: HeroSectionProps) {
             </span>
           </button>
 
-          <button onClick={handleTryWebVersion} className="btn-secondary px-6 py-3">
+          <button onClick={onTryWebVersion} className="btn-secondary px-6 py-3">
             Try Web Version
           </button>
         </div>

@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { TextRewriter } from '@/components/TextRewriter';
 import { ApiKeySetup } from '@/components/ApiKeySetup';
 import { HeroSection } from '@/components/HeroSection';
+import { WebVersion } from '@/components/WebVersion';
 
 const Index = () => {
   const [apiKey, setApiKey] = useState<string | null>(
     localStorage.getItem('gemini-api-key')
   );
   const [showApp, setShowApp] = useState(false);
+  const [showWebVersion, setShowWebVersion] = useState(false);
 
   const handleApiKeySet = (key: string) => {
     setApiKey(key);
@@ -22,7 +24,12 @@ const Index = () => {
   };
 
   const handleTryWebVersion = () => {
-    setShowApp(true);
+    setShowWebVersion(true);
+  };
+
+  const handleBackToHome = () => {
+    setShowWebVersion(false);
+    setShowApp(false);
   };
 
   const hasValidApiKey = apiKey && apiKey !== 'demo-mode';
@@ -47,8 +54,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {!showApp ? (
-        <HeroSection onInstallClick={handleInstallClick} />
+      {showWebVersion ? (
+        <WebVersion onBack={handleBackToHome} />
+      ) : !showApp ? (
+        <HeroSection onInstallClick={handleInstallClick} onTryWebVersion={handleTryWebVersion} />
       ) : (
         <div className="app-section opacity-0">
           {/* Navigation Bar */}
