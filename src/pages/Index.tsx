@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import { TextRewriter } from '@/components/TextRewriter';
 import { ApiKeySetup } from '@/components/ApiKeySetup';
-import { HeroSection } from '@/components/HeroSection';
 import { WebVersion } from '@/components/WebVersion';
 import { ParticleBackground } from '@/components/ParticleBackground';
+import { SmartFileSystem } from '@/components/sections/SmartFileSystem';
+import { HowItWorks } from '@/components/sections/HowItWorks';
+import { WhatMakesDifferent } from '@/components/sections/WhatMakesDifferent';
+import { BeforeAfterResults } from '@/components/sections/BeforeAfterResults';
+import { WhyChoose } from '@/components/sections/WhyChoose';
+import { Chrome, Menu, X, Sparkles, Zap } from 'lucide-react';
 
 const Index = () => {
   const [apiKey, setApiKey] = useState<string | null>(
@@ -11,6 +16,7 @@ const Index = () => {
   );
   const [showApp, setShowApp] = useState(false);
   const [showWebVersion, setShowWebVersion] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleApiKeySet = (key: string) => {
     setApiKey(key);
@@ -36,115 +42,167 @@ const Index = () => {
   const hasValidApiKey = apiKey && apiKey !== 'demo-mode';
 
   useEffect(() => {
-    // Set demo mode if no API key exists
     if (!apiKey) {
       setApiKey('demo-mode');
       localStorage.setItem('gemini-api-key', 'demo-mode');
     }
   }, [apiKey]);
 
-  useEffect(() => {
-    if (showApp) {
-      // CSS-based animation
-      const appSection = document.querySelector('.app-section');
-      if (appSection) {
-        (appSection as HTMLElement).style.animation = 'fadeInUp 0.8s ease-out forwards';
-      }
-    }
-  }, [showApp]);
+  if (showWebVersion) {
+    return <WebVersion onBack={handleBackToHome} />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <ParticleBackground />
-      {showWebVersion ? (
-        <WebVersion onBack={handleBackToHome} />
-      ) : !showApp ? (
-        <HeroSection onInstallClick={handleInstallClick} onTryWebVersion={handleTryWebVersion} />
-      ) : (
-        <div className="app-section opacity-0">
-          {/* Premium Navigation Bar */}
-          <nav className="navbar-glass sticky top-0 z-50">
-            <div className="container mx-auto px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <h1 className="text-2xl font-display gradient-text">prompt10X</h1>
-                  <div className="hidden sm:block text-sm text-muted-foreground font-sans">
-                    AI-Powered Text Rewriter
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <button className="nav-link text-sm text-muted-foreground">
-                    Features
-                  </button>
-                  <button className="nav-link text-sm text-muted-foreground">
-                    Pricing
-                  </button>
-                  <button
-                    onClick={handleInstallClick}
-                    className="btn-secondary text-sm px-6 py-2"
-                  >
-                    Install Extension
-                  </button>
-                </div>
+      
+      {/* Premium Navigation */}
+      <nav className="navbar-glass fixed top-0 left-0 right-0 z-50">
+        <div className="container-premium">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-8">
+              <h1 className="text-2xl font-display gradient-text font-semibold">
+                Prompt10X
+              </h1>
+              <div className="hidden md:flex items-center gap-6">
+                <a href="#file-system" className="nav-link text-sm">Features</a>
+                <a href="#how-it-works" className="nav-link text-sm">How It Works</a>
+                <a href="#before-after" className="nav-link text-sm">Results</a>
+                <a href="#why-choose" className="nav-link text-sm">Why Choose</a>
               </div>
             </div>
-          </nav>
-
-          {/* Main Content */}
-          <div className="container mx-auto px-6 py-16">
-            <div className="max-w-5xl mx-auto space-y-16">
-              {/* Welcome Section */}
-              <div className="text-center mb-12 fade-in-up">
-                <h2 className="text-4xl font-display gradient-text mb-4">
-                  Ready to Transform Your Writing?
-                </h2>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-body">
-                  Experience the power of AI-driven text transformation with our premium tools.
-                </p>
+            
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-3">
+                <button
+                  onClick={handleTryWebVersion}
+                  className="btn-secondary text-sm"
+                >
+                  Try Free
+                </button>
+                <button
+                  onClick={handleInstallClick}
+                  className="btn-premium text-sm px-6 py-3"
+                >
+                  <Chrome className="w-4 h-4 mr-2" />
+                  Install Extension
+                </button>
               </div>
-
-              {/* API Key Setup */}
-              <div className="glass-card fade-in-up">
-                <ApiKeySetup 
-                  onApiKeySet={handleApiKeySet}
-                  hasValidApiKey={!!hasValidApiKey}
-                />
-              </div>
-
-              {/* Text Rewriter */}
-              <div className="glass-card fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <TextRewriter />
-              </div>
+              
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
             </div>
           </div>
+        </div>
+      </nav>
 
-          {/* Premium Footer */}
-          <footer className="navbar-glass mt-24">
-            <div className="container mx-auto px-6 py-12">
-              <div className="text-center">
-                <div className="mb-8">
-                  <h3 className="text-2xl font-display gradient-text mb-2">prompt10X</h3>
-                  <p className="text-muted-foreground font-body">Transforming writing with AI precision</p>
-                </div>
-                <div className="flex justify-center gap-8 text-sm mb-6">
-                  <button className="nav-link">About</button>
-                  <button className="nav-link">Privacy</button>
-                  <button className="nav-link">Terms</button>
-                  <button 
-                    onClick={handleInstallClick}
-                    className="nav-link text-accent"
-                  >
-                    Chrome Extension
-                  </button>
-                </div>
-                <p className="text-xs text-muted-foreground-secondary font-body">
-                  © 2024 prompt10X. Built with precision and care.
-                </p>
-              </div>
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div className="fixed inset-0 bg-background/80 backdrop-blur-xl">
+            <div className="flex flex-col items-center justify-center h-full gap-8 text-center">
+              <a href="#file-system" className="text-xl nav-link" onClick={() => setMobileMenuOpen(false)}>Features</a>
+              <a href="#how-it-works" className="text-xl nav-link" onClick={() => setMobileMenuOpen(false)}>How It Works</a>
+              <a href="#before-after" className="text-xl nav-link" onClick={() => setMobileMenuOpen(false)}>Results</a>
+              <a href="#why-choose" className="text-xl nav-link" onClick={() => setMobileMenuOpen(false)}>Why Choose</a>
+              <button onClick={handleTryWebVersion} className="btn-secondary">Try Free</button>
+              <button onClick={handleInstallClick} className="btn-premium">Install Extension</button>
             </div>
-          </footer>
+          </div>
         </div>
       )}
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-20" />
+        <div className="absolute inset-0 bg-glow" />
+        
+        <div className="container-premium text-center relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/80 backdrop-blur-md border border-accent/20 mb-8">
+              <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+              <span className="text-sm font-medium text-accent">AI-Powered Prompt Enhancement</span>
+            </div>
+
+            <h1 className="text-hero gradient-text mb-8 font-display">
+              Transform Your AI Prompts
+            </h1>
+            
+            <p className="text-subtitle text-muted-foreground mb-12 max-w-3xl mx-auto">
+              Get 10x better AI results with scientifically optimized prompts. 
+              Professional-grade enhancement that turns good prompts into exceptional ones.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+              <button
+                onClick={handleTryWebVersion}
+                className="btn-premium text-lg px-10 py-4 group shadow-glow"
+              >
+                <span className="flex items-center gap-3">
+                  <Sparkles className="w-5 h-5 group-hover:animate-spin" />
+                  Try Prompt10X Free
+                  <Zap className="w-4 h-4" />
+                </span>
+              </button>
+
+              <button 
+                onClick={handleInstallClick} 
+                className="btn-secondary px-8 py-4 text-lg group"
+              >
+                <span className="flex items-center gap-2">
+                  <Chrome className="w-5 h-5" />
+                  Chrome Extension
+                </span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+              {[
+                { icon: '🚀', text: 'Lightning Fast', desc: '<3s processing' },
+                { icon: '🎯', text: 'Precision AI', desc: '94% success rate' },
+                { icon: '✨', text: 'Smart Enhancement', desc: '10x better results' },
+                { icon: '🔒', text: 'Enterprise Secure', desc: 'SOC 2 certified' }
+              ].map((feature, index) => (
+                <div key={index} className="elevated-card px-4 py-3 text-center">
+                  <div className="text-xl mb-1">{feature.icon}</div>
+                  <div className="text-sm font-medium text-foreground">{feature.text}</div>
+                  <div className="text-xs text-muted-foreground">{feature.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* All Premium Sections */}
+      <SmartFileSystem />
+      <HowItWorks />
+      <WhatMakesDifferent />
+      <BeforeAfterResults />
+      <WhyChoose />
+
+      {/* Premium Footer */}
+      <footer className="navbar-glass section-padding">
+        <div className="container-premium text-center">
+          <h3 className="text-2xl font-display gradient-text mb-4">Prompt10X</h3>
+          <p className="text-muted-foreground mb-8">Transform your AI workflow with professional-grade prompt enhancement</p>
+          
+          <div className="flex justify-center gap-8 text-sm mb-6">
+            <a href="#" className="nav-link">About</a>
+            <a href="#" className="nav-link">Privacy</a>
+            <a href="#" className="nav-link">Terms</a>
+            <button onClick={handleInstallClick} className="nav-link text-accent">Chrome Extension</button>
+          </div>
+          
+          <p className="text-xs text-muted-foreground">
+            © 2024 Prompt10X. Crafted with precision for AI professionals.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

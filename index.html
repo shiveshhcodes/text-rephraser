@@ -1,29 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>prompt10X - AI-Powered Text Rewriter</title>
-    <meta name="description" content="Transform your writing with AI-powered text rewriting. Choose from multiple tones and styles to make your content shine." />
-    <meta name="author" content="prompt10X" />
-
-    <meta property="og:title" content="prompt10X - AI-Powered Text Rewriter" />
-    <meta property="og:description" content="Transform your writing with AI-powered text rewriting. Choose from multiple tones and styles to make your content shine." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@prompt10X" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Prompt10X - Transform Your AI Prompts | Premium AI Tool</title>
     
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Transform your AI prompts with Prompt10X - The premium AI prompt enhancement tool for professionals">
+    <meta name="keywords" content="AI prompts, prompt engineering, AI tools, productivity">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Prompt10X - Transform Your AI Prompts">
+    <meta property="og:description" content="The premium AI prompt enhancement tool for professionals">
+    <meta property="og:type" content="website">
+    
+    <!-- Smooth Scrolling -->
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Premium Loading Animation */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #0E1117 0%, #1A1D24 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.8s ease, visibility 0.8s ease;
+      }
+      
+      .loading-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      
+      .loading-logo {
+        font-family: 'Crimson Pro', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #A970FF 0%, #60C1FF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: pulse 2s infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 1; }
+      }
+    </style>
   </head>
-
   <body>
+    <!-- Premium Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-logo">Prompt10X</div>
+    </div>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <script>
+      // Hide loading screen when page is loaded
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => {
+              loadingScreen.remove();
+            }, 800);
+          }
+        }, 1000);
+      });
+    </script>
   </body>
 </html>
