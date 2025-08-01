@@ -84,18 +84,25 @@ export function HowItWorks() {
         }
       );
 
-      // Animate connection lines with smoother timing
-      gsap.fromTo('.connection-line', 
+      // Animate progressive line based on scroll position
+      gsap.fromTo('.progressive-line', 
         { scaleX: 0 },
         {
           scaleX: 1,
-          duration: 0.5,
-          stagger: 0.1,
+          duration: 1,
           ease: "power2.out",
           scrollTrigger: {
             trigger: stepsRef.current,
-            start: "top 70%",
-            toggleActions: "play none none reverse"
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              const line = document.querySelector('.progressive-line') as HTMLElement;
+              if (line) {
+                line.style.transform = `scaleX(${progress})`;
+              }
+            }
           }
         }
       );
@@ -118,19 +125,16 @@ export function HowItWorks() {
         </div>
 
         <div className="relative max-w-7xl mx-auto" ref={stepsRef}>
-          {/* Connection Lines */}
+          {/* Progressive Connection Line */}
           <div className="hidden lg:block absolute top-24 left-0 right-0 h-px">
-            {steps.slice(0, -1).map((_, index) => (
-              <div 
-                key={index}
-                className="connection-line absolute h-px bg-gradient-to-r from-accent to-primary"
-                style={{
-                  left: `${(index + 1) * 25 - 12.5}%`,
-                  width: '25%',
-                  transformOrigin: 'left center'
-                }}
-              />
-            ))}
+            <div 
+              className="progressive-line absolute h-px bg-gradient-to-r from-accent to-primary"
+              style={{
+                left: '0%',
+                width: '100%',
+                transformOrigin: 'left center'
+              }}
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
