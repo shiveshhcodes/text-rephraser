@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Copy, Check, Sparkles, TrendingUp } from 'lucide-react';
 import { gsap } from 'gsap';
+import { useCounter } from '@/hooks/use-counter';
 
 const promptExamples = [
   {
@@ -9,7 +10,7 @@ const promptExamples = [
     before: "Write a product description for a new smartphone.",
     after: "Create a compelling product description for a premium smartphone that emphasizes innovative camera technology, all-day battery life, and sleek design. Target tech-savvy professionals aged 25-40 who value performance and style. Include emotional triggers around capturing life's moments and staying connected. Format as engaging web copy with clear benefits and a strong call-to-action.",
     improvement: "312% more specific",
-    metrics: { engagement: "+89%", conversions: "+156%", clarity: "+240%" }
+    metrics: { engagement: "+125%", conversions: "+156%", clarity: "+240%" }
   },
   {
     id: 2,
@@ -34,6 +35,8 @@ export function BeforeAfterResults() {
   const [activeExample, setActiveExample] = useState(0);
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const [showComparison, setShowComparison] = useState(false);
+  const [sliderStyle, setSliderStyle] = useState({});
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -71,6 +74,16 @@ export function BeforeAfterResults() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const activeButton = buttonRefs.current[activeExample];
+    if (activeButton) {
+      setSliderStyle({
+        width: activeButton.offsetWidth,
+        transform: `translateX(${activeButton.offsetLeft - 8}px)`
+      });
+    }
+  }, [activeExample]);
+
   const handleCopy = async (text: string, type: 'before' | 'after') => {
     await navigator.clipboard.writeText(text);
     setCopiedText(`${activeExample}-${type}`);
@@ -94,14 +107,20 @@ export function BeforeAfterResults() {
 
         {/* Example Selector */}
         <div className="flex justify-center mb-12">
-          <div className="bg-surface/50 backdrop-blur-xl border border-border/50 rounded-2xl p-2">
+          <div className="bg-surface/50 backdrop-blur-xl border border-border/50 rounded-2xl p-2 relative">
+            {/* Sliding Background */}
+            <div 
+              className="absolute top-2 bottom-2 bg-gradient-to-r from-accent to-primary rounded-xl transition-all duration-300 ease-out shadow-lg"
+              style={sliderStyle}
+            />
             {promptExamples.map((example, index) => (
               <button
                 key={example.id}
+                ref={(el) => (buttonRefs.current[index] = el)}
                 onClick={() => setActiveExample(index)}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                className={`relative px-5 py-3 rounded-xl font-medium transition-all duration-300 z-10 ${
                   activeExample === index
-                    ? 'bg-gradient-to-r from-accent to-primary text-white shadow-lg'
+                    ? 'text-white font-semibold'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -191,12 +210,7 @@ export function BeforeAfterResults() {
             </div>
           </div>
 
-          {/* Arrow Indicator */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-gradient-to-r from-accent to-primary p-4 rounded-full shadow-glow animate-pulse">
-              <ArrowRight className="w-6 h-6 text-white" />
-            </div>
-          </div>
+
 
           {/* Performance Metrics */}
           <div className="card-premium bg-gradient-to-r from-surface/50 to-surface-elevated/50">
@@ -210,16 +224,25 @@ export function BeforeAfterResults() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {Object.entries(currentExample.metrics).map(([key, value]) => (
-                <div key={key} className="text-center">
-                  <div className="text-3xl font-bold gradient-text mb-2">
-                    {value}
+              {Object.entries(currentExample.metrics).map(([key, value], index) => {
+                const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
+                const { count } = useCounter({
+                  end: numericValue,
+                  duration: 2000,
+                  delay: index * 300
+                });
+                
+                return (
+                  <div key={key} className="text-center">
+                    <div className="text-3xl font-bold gradient-text mb-2">
+                      +{Math.floor(count)}%
+                    </div>
+                    <div className="text-sm text-muted-foreground capitalize">
+                      {key} Improvement
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground capitalize">
-                    {key} Improvement
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
