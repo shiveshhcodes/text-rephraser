@@ -17,7 +17,7 @@ const testimonials = [
     role: "Senior Developer",
     company: "DevCorp",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    quote: "The code review prompts are incredible. I catch bugs and optimization opportunities I would have missed.",
+    quote: "The technical writing prompts are incredible. I create clearer documentation and catch issues I would have missed.",
     rating: 5,
     metric: "+40% code quality"
   },
@@ -43,13 +43,13 @@ const benefits = [
   {
     icon: <TrendingUp className="w-8 h-8" />,
     title: "10x Better Results",
-    description: "Get dramatically improved AI outputs with scientifically optimized prompts",
+    description: "Get dramatically improved content with scientifically optimized text rewriting",
     color: "from-green-500 to-emerald-500"
   },
   {
     icon: <Clock className="w-8 h-8" />,
     title: "Save Hours Daily",
-    description: "Stop struggling with prompt engineering - get perfect prompts instantly",
+    description: "Stop struggling with content creation - get perfect text instantly",
     color: "from-blue-500 to-cyan-500"
   },
   {
@@ -73,14 +73,14 @@ export function WhyChoose() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo('.trust-signal', 
-        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 0, y: 25, scale: 0.95 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "back.out(1.7)",
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: '.trust-signals',
             start: "top 80%",
@@ -90,14 +90,14 @@ export function WhyChoose() {
       );
 
       gsap.fromTo('.benefit-card', 
-        { opacity: 0, y: 40, rotationX: 10 },
+        { opacity: 0, y: 30, rotationX: 5 },
         {
           opacity: 1,
           y: 0,
           rotationX: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: '.benefits-grid',
             start: "top 75%",
@@ -107,11 +107,12 @@ export function WhyChoose() {
       );
 
       gsap.fromTo('.testimonial-card', 
-        { opacity: 0, scale: 0.9 },
+        { opacity: 0, scale: 0.95 },
         {
           opacity: 1,
           scale: 1,
-          duration: 0.6,
+          duration: 0.5,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: '.testimonials-section',
             start: "top 80%",
@@ -140,7 +141,7 @@ export function WhyChoose() {
             Why Choose Prompt10X
           </h2>
           <p className="text-body-large text-muted-foreground max-w-3xl mx-auto">
-            Join thousands of professionals who've already transformed their AI workflow 
+            Join thousands of professionals who've already transformed their content workflow 
             and achieved remarkable results.
           </p>
         </div>
@@ -272,7 +273,7 @@ export function WhyChoose() {
                 Ready to join the elite?
               </h3>
               <p className="text-muted-foreground">
-                Transform your AI workflow today and see results immediately
+                Transform your content workflow today and see results immediately
               </p>
             </div>
             

@@ -9,8 +9,8 @@ const steps = [
   {
     id: 1,
     icon: <Upload className="w-8 h-8" />,
-    title: 'Input Your Prompt',
-    description: 'Paste or type your existing prompt into our intelligent editor. Our AI immediately begins analyzing structure, clarity, and potential improvements.',
+    title: 'Input Your Text',
+    description: 'Paste or type your existing text into our intelligent editor. Our AI immediately begins analyzing structure, clarity, and potential improvements.',
     color: 'from-blue-500 to-cyan-500',
     delay: 0
   },
@@ -18,7 +18,7 @@ const steps = [
     id: 2,
     icon: <Wand2 className="w-8 h-8" />,
     title: 'AI Enhancement Magic',
-    description: 'Our advanced AI engine applies proven prompt engineering techniques, optimizing for clarity, context, and specific outcomes.',
+    description: 'Our advanced AI engine applies proven text optimization techniques, enhancing for clarity, context, and specific outcomes.',
     color: 'from-purple-500 to-pink-500',
     delay: 0.2
   },
@@ -34,7 +34,7 @@ const steps = [
     id: 4,
     icon: <Download className="w-8 h-8" />,
     title: 'Deploy & Succeed',
-    description: 'Copy your enhanced prompt and watch as AI models deliver significantly better, more precise results than ever before.',
+    description: 'Copy your enhanced text and watch as it delivers significantly better, more precise results than ever before.',
     color: 'from-orange-500 to-red-500',
     delay: 0.6
   }
@@ -46,13 +46,14 @@ export function HowItWorks() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate the main heading
+      // Animate the main heading with smoother timing
       gsap.fromTo('.how-it-works-title', 
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.6,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
@@ -61,20 +62,20 @@ export function HowItWorks() {
         }
       );
 
-      // Animate steps with stagger
+      // Animate steps with smoother stagger
       gsap.fromTo('.step-card', 
         { 
           opacity: 0, 
-          y: 60,
-          scale: 0.8
+          y: 40,
+          scale: 0.95
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "back.out(1.7)",
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: stepsRef.current,
             start: "top 85%",
@@ -83,13 +84,14 @@ export function HowItWorks() {
         }
       );
 
-      // Animate connection lines
+      // Animate connection lines with smoother timing
       gsap.fromTo('.connection-line', 
         { scaleX: 0 },
         {
           scaleX: 1,
-          duration: 0.6,
+          duration: 0.5,
           stagger: 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: stepsRef.current,
             start: "top 70%",
@@ -110,7 +112,7 @@ export function HowItWorks() {
             How Prompt10X Works
           </h2>
           <p className="text-body-large text-muted-foreground max-w-3xl mx-auto">
-            Transform any prompt from good to exceptional in seconds. Our AI-powered enhancement 
+            Transform any text from good to exceptional in seconds. Our AI-powered enhancement 
             process is designed for professionals who demand results.
           </p>
         </div>
@@ -177,10 +179,10 @@ export function HowItWorks() {
           <div className="inline-flex items-center gap-4 bg-gradient-to-r from-surface/80 to-surface-elevated/80 backdrop-blur-xl border border-border/50 rounded-2xl p-6">
             <div className="text-left">
               <h3 className="text-xl font-semibold text-foreground mb-2">
-                Ready to transform your prompts?
+                Ready to transform your text?
               </h3>
               <p className="text-muted-foreground">
-                Join thousands of professionals getting better AI results
+                Join thousands of professionals getting better results
               </p>
             </div>
             <button className="btn-premium shrink-0">

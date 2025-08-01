@@ -9,7 +9,7 @@ const differentiators = [
   {
     icon: <Brain className="w-8 h-8" />,
     title: 'Advanced AI Engine',
-    description: 'Trained on millions of high-performing prompts across industries',
+    description: 'Trained on millions of high-performing texts across industries',
     details: 'Our proprietary AI understands context, intent, and optimization patterns that deliver 10x better results',
     color: 'from-blue-500 to-cyan-500',
     metric: '94% Success Rate'
@@ -17,7 +17,7 @@ const differentiators = [
   {
     icon: <Zap className="w-8 h-8" />,
     title: 'Lightning Fast Processing',
-    description: 'Get enhanced prompts in under 3 seconds, not minutes',
+    description: 'Get enhanced text in under 3 seconds, not minutes',
     details: 'Advanced optimization algorithms provide instant results without compromising quality',
     color: 'from-purple-500 to-pink-500',
     metric: '<3s Processing'
@@ -25,15 +25,15 @@ const differentiators = [
   {
     icon: <Target className="w-8 h-8" />,
     title: 'Precision Targeting',
-    description: 'Tailored optimization for specific AI models and use cases',
-    details: 'Whether GPT, Claude, or custom models - we optimize for your exact requirements',
+    description: 'Tailored optimization for specific use cases and industries',
+    details: 'Whether marketing, technical, or creative content - we optimize for your exact requirements',
     color: 'from-green-500 to-emerald-500',
-    metric: '15+ AI Models'
+    metric: '15+ Industries'
   },
   {
     icon: <Shield className="w-8 h-8" />,
     title: 'Enterprise Security',
-    description: 'Your prompts stay private with end-to-end encryption',
+    description: 'Your content stays private with end-to-end encryption',
     details: 'Zero data retention, SOC 2 compliance, and military-grade security protocols',
     color: 'from-orange-500 to-red-500',
     metric: 'SOC 2 Certified'
@@ -42,9 +42,9 @@ const differentiators = [
 
 const comparisonData = [
   { feature: 'Processing Speed', us: 'Lightning Fast (<3s)', others: 'Slow (30s+)', advantage: true },
-  { feature: 'AI Model Support', us: '15+ Models', others: '2-3 Models', advantage: true },
+  { feature: 'Industry Support', us: '15+ Industries', others: '2-3 Industries', advantage: true },
   { feature: 'Security', us: 'Enterprise Grade', others: 'Basic', advantage: true },
-  { feature: 'Prompt Library', us: '10,000+ Templates', others: 'Limited', advantage: true },
+  { feature: 'Text Library', us: '10,000+ Templates', others: 'Limited', advantage: true },
   { feature: 'Success Rate', us: '94%', others: '67%', advantage: true },
 ];
 
@@ -57,16 +57,16 @@ export function WhatMakesDifferent() {
       gsap.fromTo('.differentiator-card', 
         { 
           opacity: 0, 
-          y: 50,
-          rotationX: 10
+          y: 40,
+          rotationX: 5
         },
         {
           opacity: 1,
           y: 0,
           rotationX: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 75%",
@@ -76,12 +76,13 @@ export function WhatMakesDifferent() {
       );
 
       gsap.fromTo('.comparison-row', 
-        { opacity: 0, x: -30 },
+        { opacity: 0, x: -20 },
         {
           opacity: 1,
           x: 0,
-          duration: 0.6,
-          stagger: 0.1,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: '.comparison-table',
             start: "top 80%",

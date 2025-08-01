@@ -40,16 +40,16 @@ export function ParticleBackground() {
 
     const initParticles = () => {
       particlesRef.current = [];
-      // Create floating particles
-      for (let i = 0; i < 50; i++) {
+      // Create floating particles with optimized performance
+      for (let i = 0; i < 30; i++) { // Reduced from 50 to 30 for better performance
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 3 + 1,
+          vx: (Math.random() - 0.5) * 0.3, // Reduced velocity for smoother movement
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 2 + 1, // Reduced size range
           type: Math.random() < 0.7 ? 'light' : Math.random() < 0.85 ? 'glow' : 'pulse',
-          opacity: Math.random() * 0.5 + 0.3
+          opacity: Math.random() * 0.4 + 0.2 // Reduced opacity range
         });
       }
 
@@ -58,31 +58,31 @@ export function ParticleBackground() {
     };
 
     const createWordParticle = () => {
-      if (wordParticlesRef.current.length < 3) {
+      if (wordParticlesRef.current.length < 2) { // Reduced from 3 to 2
         wordParticlesRef.current.push({
           x: Math.random() * (canvas.width - 200) + 100,
           y: canvas.height + 50,
           word: words[Math.floor(Math.random() * words.length)],
           progress: 0,
-          speed: 0.003 + Math.random() * 0.002
+          speed: 0.002 + Math.random() * 0.001 // Reduced speed
         });
       }
     };
 
     const updateParticles = () => {
-      // Update floating particles
+      // Update floating particles with smoother movement
       particlesRef.current.forEach(particle => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
+        // Wrap around edges with smoother transitions
+        if (particle.x < -10) particle.x = canvas.width + 10;
+        if (particle.x > canvas.width + 10) particle.x = -10;
+        if (particle.y < -10) particle.y = canvas.height + 10;
+        if (particle.y > canvas.height + 10) particle.y = -10;
 
-        // Gentle opacity oscillation
-        particle.opacity = 0.3 + Math.sin(Date.now() * 0.001 + particle.x * 0.01) * 0.3;
+        // Smoother opacity oscillation
+        particle.opacity = 0.2 + Math.sin(Date.now() * 0.0005 + particle.x * 0.005) * 0.2;
       });
 
       // Update word particles
@@ -95,8 +95,8 @@ export function ParticleBackground() {
         }
       });
 
-      // Randomly create new word particles
-      if (Math.random() < 0.005) {
+      // Reduced frequency of new word particles
+      if (Math.random() < 0.003) { // Reduced from 0.005
         createWordParticle();
       }
     };
@@ -104,23 +104,23 @@ export function ParticleBackground() {
     const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw floating particles
+      // Draw floating particles with optimized rendering
       particlesRef.current.forEach(particle => {
         ctx.save();
         ctx.globalAlpha = particle.opacity;
 
         switch (particle.type) {
           case 'light':
-            ctx.fillStyle = 'hsl(240, 30%, 85%)'; // --particle-light
+            ctx.fillStyle = 'hsl(240, 30%, 85%)';
             break;
           case 'glow':
-            ctx.fillStyle = 'hsl(273, 100%, 72%)'; // --particle-glow
-            ctx.shadowBlur = 20;
+            ctx.fillStyle = 'hsl(273, 100%, 72%)';
+            ctx.shadowBlur = 15; // Reduced shadow blur
             ctx.shadowColor = 'hsl(273, 100%, 72%)';
             break;
           case 'pulse':
-            ctx.fillStyle = 'hsl(150, 90%, 52%)'; // --particle-pulse
-            ctx.shadowBlur = 15;
+            ctx.fillStyle = 'hsl(150, 90%, 52%)';
+            ctx.shadowBlur = 10; // Reduced shadow blur
             ctx.shadowColor = 'hsl(150, 90%, 52%)';
             break;
         }
@@ -131,7 +131,7 @@ export function ParticleBackground() {
         ctx.restore();
       });
 
-      // Draw word particles
+      // Draw word particles with optimized rendering
       wordParticlesRef.current.forEach(wordParticle => {
         const opacity = wordParticle.progress < 0.1 
           ? wordParticle.progress * 10 
@@ -140,13 +140,13 @@ export function ParticleBackground() {
           : 1;
 
         ctx.save();
-        ctx.globalAlpha = opacity * 0.6;
+        ctx.globalAlpha = opacity * 0.5; // Reduced opacity
         ctx.fillStyle = 'hsl(273, 100%, 72%)';
-        ctx.font = '300 24px Space Grotesk, sans-serif';
+        ctx.font = '300 20px Space Grotesk, sans-serif'; // Reduced font size
         ctx.textAlign = 'center';
         
-        // Add subtle glow
-        ctx.shadowBlur = 30;
+        // Reduced glow effect
+        ctx.shadowBlur = 20;
         ctx.shadowColor = 'hsl(273, 100%, 72%)';
         
         ctx.fillText(wordParticle.word, wordParticle.x, wordParticle.y);
@@ -164,16 +164,18 @@ export function ParticleBackground() {
     initParticles();
     animate();
 
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       resizeCanvas();
       initParticles();
-    });
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

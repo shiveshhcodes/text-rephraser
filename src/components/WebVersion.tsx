@@ -63,7 +63,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
                 <Sparkles className="w-5 h-5 icon-thin animate-pulse" />
                 <span className="text-sm font-medium font-sans">Web Experience</span>
               </div>
-              <div className="gradient-text text-3xl font-display">prompt10X</div>
+              <div className="gradient-text text-3xl font-display">Prompt10X</div>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -120,7 +120,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
               <div className="w-3 h-3 rounded-full bg-red-400 animate-pulse"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-400 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
               <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-              <span className="text-sm text-muted-foreground ml-6 font-sans">prompt10X Web Studio</span>
+              <span className="text-sm text-muted-foreground ml-6 font-sans">Prompt10X Web Studio</span>
             </div>
             
             <TextRewriter />

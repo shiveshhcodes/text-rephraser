@@ -38,11 +38,12 @@ export function BeforeAfterResults() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo('.before-after-title', 
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.6,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
@@ -52,12 +53,12 @@ export function BeforeAfterResults() {
       );
 
       gsap.fromTo('.comparison-container', 
-        { opacity: 0, scale: 0.95 },
+        { opacity: 0, scale: 0.98 },
         {
           opacity: 1,
           scale: 1,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.8,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: '.comparison-container',
             start: "top 75%",
@@ -86,7 +87,7 @@ export function BeforeAfterResults() {
             See the Transformation
           </h2>
           <p className="text-body-large text-muted-foreground max-w-3xl mx-auto">
-            Real prompts, real improvements. Watch ordinary prompts become extraordinary 
+            Real text, real improvements. Watch ordinary content become extraordinary 
             with our AI enhancement technology.
           </p>
         </div>
@@ -120,7 +121,7 @@ export function BeforeAfterResults() {
                   Before Enhancement
                 </h3>
                 <span className="text-sm text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
-                  Basic Prompt
+                  Basic Text
                 </span>
               </div>
               
@@ -228,7 +229,7 @@ export function BeforeAfterResults() {
           <button className="btn-premium group">
             <span className="flex items-center gap-3">
               <Sparkles className="w-5 h-5 group-hover:animate-spin" />
-              Transform Your Prompts Now
+              Transform Your Text Now
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </button>

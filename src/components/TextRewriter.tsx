@@ -254,7 +254,7 @@ export function TextRewriter() {
       </div>
 
       {/* Action Button */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-8">
         <Button
           onClick={handleRewrite}
           disabled={!inputText.trim() || isLoading}

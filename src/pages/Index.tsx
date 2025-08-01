@@ -125,19 +125,19 @@ const Index = () => {
           <div className="max-w-5xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/80 backdrop-blur-md border border-accent/20 mb-8">
               <Sparkles className="w-4 h-4 text-accent animate-pulse" />
-              <span className="text-sm font-medium text-accent">AI-Powered Prompt Enhancement</span>
+              <span className="text-sm font-medium text-accent">AI-Powered Text Enhancement</span>
             </div>
 
             <h1 className="text-hero gradient-text mb-8 font-display">
-              Transform Your AI Prompts
+              Transform Your Text with AI
             </h1>
             
             <p className="text-subtitle text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Get 10x better AI results with scientifically optimized prompts. 
-              Professional-grade enhancement that turns good prompts into exceptional ones.
+              Get 10x better results with scientifically optimized text rewriting. 
+              Professional-grade enhancement that turns good content into exceptional content.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <button
                 onClick={handleTryWebVersion}
                 className="btn-premium text-lg px-10 py-4 group shadow-glow"
@@ -189,7 +189,7 @@ const Index = () => {
       <footer className="navbar-glass section-padding">
         <div className="container-premium text-center">
           <h3 className="text-2xl font-display gradient-text mb-4">Prompt10X</h3>
-          <p className="text-muted-foreground mb-8">Transform your AI workflow with professional-grade prompt enhancement</p>
+          <p className="text-muted-foreground mb-8">Transform your content workflow with professional-grade text enhancement</p>
           
           <div className="flex justify-center gap-8 text-sm mb-6">
             <a href="#" className="nav-link">About</a>
@@ -199,7 +199,7 @@ const Index = () => {
           </div>
           
           <p className="text-xs text-muted-foreground">
-            © 2024 Prompt10X. Crafted with precision for AI professionals.
+            © 2024 Prompt10X. Crafted with precision for content professionals.
           </p>
         </div>
       </footer>

@@ -14,7 +14,7 @@ interface FileItem {
 const fileItems: FileItem[] = [
   {
     id: '1',
-    name: 'Marketing Prompts',
+    name: 'Marketing Content',
     type: 'folder',
     icon: <Star className="w-5 h-5" />,
     description: 'Social media, email campaigns, product descriptions',
@@ -33,12 +33,12 @@ const fileItems: FileItem[] = [
     name: 'Business Strategy',
     type: 'folder',
     icon: <Brain className="w-5 h-5" />,
-    description: 'Analysis, planning, decision-making prompts',
+    description: 'Analysis, planning, decision-making content',
     color: 'from-green-500 to-emerald-500'
   },
   {
     id: '4',
-    name: 'Enhanced_Email.prompt',
+    name: 'Enhanced_Email.txt',
     type: 'file',
     icon: <Zap className="w-5 h-5" />,
     description: 'Professional email transformation',
@@ -46,15 +46,15 @@ const fileItems: FileItem[] = [
   },
   {
     id: '5',
-    name: 'Code_Review.prompt',
+    name: 'Code_Documentation.txt',
     type: 'file',
     icon: <File className="w-5 h-5" />,
-    description: 'Technical code analysis and feedback',
+    description: 'Technical documentation and analysis',
     color: 'from-indigo-500 to-purple-500'
   },
   {
     id: '6',
-    name: 'Presentation_Ideas.prompt',
+    name: 'Presentation_Ideas.txt',
     type: 'file',
     icon: <File className="w-5 h-5" />,
     description: 'Compelling presentation concepts',
@@ -71,16 +71,16 @@ export function SmartFileSystem() {
       gsap.fromTo('.file-item', 
         { 
           opacity: 0, 
-          y: 40,
-          scale: 0.9
+          y: 30,
+          scale: 0.95
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "back.out(1.7)",
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
@@ -98,11 +98,11 @@ export function SmartFileSystem() {
       <div className="container-premium" ref={containerRef}>
         <div className="text-center mb-16">
           <h2 className="text-section-title gradient-text mb-6">
-            Organize Your AI Workflow
+            Organize Your Content Workflow
           </h2>
           <p className="text-body-large text-muted-foreground max-w-3xl mx-auto">
-            Never lose a perfect prompt again. Our smart file system learns from your usage patterns 
-            and suggests the most effective prompts for any situation.
+            Never lose a perfect text again. Our smart file system learns from your usage patterns 
+            and suggests the most effective content for any situation.
           </p>
         </div>
 
@@ -136,7 +136,7 @@ export function SmartFileSystem() {
                   
                   <div className="flex items-center gap-2 mt-3">
                     <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${item.color} text-white`}>
-                      {item.type === 'folder' ? 'Folder' : 'Prompt'}
+                      {item.type === 'folder' ? 'Folder' : 'Content'}
                     </span>
                     {item.type === 'file' && (
                       <span className="text-xs text-muted-foreground">
@@ -150,7 +150,7 @@ export function SmartFileSystem() {
               {hoveredItem === item.id && (
                 <div className="mt-4 pt-4 border-t border-border/50">
                   <button className="btn-premium w-full justify-center py-2 text-sm">
-                    {item.type === 'folder' ? 'Open Folder' : 'Use Prompt'}
+                    {item.type === 'folder' ? 'Open Folder' : 'Use Content'}
                   </button>
                 </div>
               )}
@@ -162,7 +162,7 @@ export function SmartFileSystem() {
           <button className="btn-success px-8 py-4 text-lg group">
             <span className="flex items-center gap-3">
               <Sparkles className="w-5 h-5 group-hover:animate-spin" />
-              Start Organizing Your Prompts
+              Start Organizing Your Content
               <Zap className="w-4 h-4" />
             </span>
           </button>
