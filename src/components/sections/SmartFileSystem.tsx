@@ -1,74 +1,40 @@
-import { useEffect, useRef, useState } from 'react';
-import { Folder, File, Star, Zap, Brain, Sparkles } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-interface FileItem {
+interface ContentBlock {
   id: string;
-  name: string;
-  type: 'folder' | 'file';
-  icon: React.ReactNode;
+  title: string;
   description: string;
   color: string;
 }
 
-const fileItems: FileItem[] = [
+const contentBlocks: ContentBlock[] = [
   {
     id: '1',
-    name: 'Marketing Content',
-    type: 'folder',
-    icon: <Star className="w-5 h-5" />,
-    description: 'Social media, email campaigns, product descriptions',
+    title: 'Why You Should Use Prompt10X in Daily Life',
+    description: 'Most people write prompts the hard way. Vague, time-wasting, and hit or miss. PromptNX fixes that. It sharpens your intent, rewrites your inputs, and pulls out exactly what AI needs to deliver high-quality results. It works like an expert in your corner, every single time. If you\'re still guessing your way through prompts, you\'re already falling behind.',
     color: 'from-blue-500 to-cyan-500'
   },
   {
     id: '2',
-    name: 'Creative Writing',
-    type: 'folder',
-    icon: <Sparkles className="w-5 h-5" />,
-    description: 'Stories, poems, scripts, and creative content',
+    title: 'What Changes You\'ll See When Using Prompt10X',
+    description: 'You stop settling for good enough. Prompts feel like they actually understand you. The AI sounds smarter, more helpful, more aligned with your goals. No fluff, no confusion, just clear and confident output that feels like your voice, only sharper. Once you see what Prompt10X unlocks, there\'s no going back to plain and underpowered inputs ever again.',
     color: 'from-purple-500 to-pink-500'
   },
   {
     id: '3',
-    name: 'Business Strategy',
-    type: 'folder',
-    icon: <Brain className="w-5 h-5" />,
-    description: 'Analysis, planning, decision-making content',
+    title: 'Why Use Prompt10X Every Time for Best Results',
+    description: 'Great results are not a one-time thing. They\'re a habit. Prompt10X builds that habit for you. Every session feels polished, every task gets done faster, and the quality stays high no matter the use case. Skipping it means wasting time and potential. This is not just a tool. It is the difference between trying AI and actually owning it.',
     color: 'from-green-500 to-emerald-500'
-  },
-  {
-    id: '4',
-    name: 'Enhanced_Email.txt',
-    type: 'file',
-    icon: <Zap className="w-5 h-5" />,
-    description: 'Professional email transformation',
-    color: 'from-orange-500 to-red-500'
-  },
-  {
-    id: '5',
-    name: 'Code_Documentation.txt',
-    type: 'file',
-    icon: <File className="w-5 h-5" />,
-    description: 'Technical documentation and analysis',
-    color: 'from-indigo-500 to-purple-500'
-  },
-  {
-    id: '6',
-    name: 'Presentation_Ideas.txt',
-    type: 'file',
-    icon: <File className="w-5 h-5" />,
-    description: 'Compelling presentation concepts',
-    color: 'from-yellow-500 to-orange-500'
   }
 ];
 
 export function SmartFileSystem() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo('.file-item', 
+      gsap.fromTo('.content-block', 
         { 
           opacity: 0, 
           y: 30,
@@ -78,8 +44,8 @@ export function SmartFileSystem() {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.5,
-          stagger: 0.08,
+          duration: 0.6,
+          stagger: 0.15,
           ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -97,75 +63,44 @@ export function SmartFileSystem() {
     <section id="file-system" className="section-padding bg-gradient-to-br from-background via-surface/50 to-background">
       <div className="container-premium" ref={containerRef}>
         <div className="text-center mb-16">
-          <h2 className="text-section-title gradient-text mb-6">
-            Organize Your Content Workflow
+          <h2 className="text-section-title gradient-text mb-6 font-bold">
+            Master Your Prompt Game
           </h2>
           <p className="text-body-large text-muted-foreground max-w-3xl mx-auto">
-            Never lose a perfect text again. Our smart file system learns from your usage patterns 
-            and suggests the most effective content for any situation.
+            Stop wasting time on trial-and-error. Our intelligent prompt engine refines your input to match exactly what the AI needs. It learns how you work, adapts on the fly, and delivers sharper, more accurate results every time you create, ask, or build.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {fileItems.map((item, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {contentBlocks.map((block, index) => (
             <div
-              key={item.id}
-              className={`file-item card-premium group cursor-pointer transition-all duration-500 ${
-                hoveredItem === item.id ? 'scale-105 shadow-glow' : ''
-              }`}
-              onMouseEnter={() => setHoveredItem(item.id)}
-              onMouseLeave={() => setHoveredItem(null)}
+              key={block.id}
+              className={`content-block card-premium group cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-glow flex flex-col h-full`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-r ${item.color} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  {item.type === 'folder' ? (
-                    <Folder className="w-6 h-6" />
-                  ) : (
-                    item.icon
-                  )}
+              <div className="p-8 flex flex-col h-full">
+                {/* Gradient accent line */}
+                <div className={`w-16 h-1 bg-gradient-to-r ${block.color} rounded-full mb-6`}></div>
+                
+                {/* Title - Fixed height area */}
+                <div className="h-20 mb-6 flex items-start">
+                  <h3 className="text-2xl font-bold text-foreground leading-tight">
+                    {block.title}
+                  </h3>
                 </div>
                 
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors duration-300">
-                    {item.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-                    {item.description}
+                {/* Description - Equal height area */}
+                <div className="flex-1 flex items-start">
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    {block.description}
                   </p>
-                  
-                  <div className="flex items-center gap-2 mt-3">
-                    <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${item.color} text-white`}>
-                      {item.type === 'folder' ? 'Folder' : 'Content'}
-                    </span>
-                    {item.type === 'file' && (
-                      <span className="text-xs text-muted-foreground">
-                        Recently enhanced
-                      </span>
-                    )}
-                  </div>
                 </div>
+                
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
               </div>
-
-              {hoveredItem === item.id && (
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <button className="btn-premium w-full justify-center py-2 text-sm">
-                    {item.type === 'folder' ? 'Open Folder' : 'Use Content'}
-                  </button>
-                </div>
-              )}
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <button className="btn-success px-8 py-4 text-lg group">
-            <span className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 group-hover:animate-spin" />
-              Start Organizing Your Content
-              <Zap className="w-4 h-4" />
-            </span>
-          </button>
         </div>
       </div>
     </section>

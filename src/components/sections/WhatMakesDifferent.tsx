@@ -236,15 +236,6 @@ export function WhatMakesDifferent() {
           </div>
         )}
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <button className="btn-premium group">
-            <span className="flex items-center gap-3">
-              Experience the Difference
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </button>
-        </div>
       </div>
     </section>
   );

@@ -129,7 +129,7 @@ const Index = () => {
             </div>
 
             <h1 className="text-hero gradient-text mb-8 font-inter">
-              <div className="block text-4xl md:text-6xl">Transform Your Text With</div>
+              <div className="block text-5xl md:text-7xl">Transform Your Text With</div>
               <div className="block text-5xl md:text-8xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent mt-2">
                 AI
               </div>
@@ -182,10 +182,10 @@ const Index = () => {
       </section>
 
       {/* All Premium Sections */}
-      <SmartFileSystem />
+      <BeforeAfterResults />
       <HowItWorks />
       <WhatMakesDifferent />
-      <BeforeAfterResults />
+      <SmartFileSystem />
       <WhyChoose />
 
       {/* Premium Footer */}

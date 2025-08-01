@@ -68,7 +68,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Heart className="w-4 h-4 text-primary animate-pulse" />
-              <span className="font-sans">Crafted with care</span>
+              <span className="font-satoshi">Created with intent, because it's needed</span>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
             <span className="text-accent font-medium font-sans">Experience for FREE</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-hanken gradient-text mb-6">
+          <h1 className="text-5xl md:text-6xl font-hanken gradient-text mb-6 leading-tight">
             Pure Magic ✨
           </h1>
           
@@ -108,8 +108,8 @@ export function WebVersion({ onBack }: WebVersionProps) {
                 style={{ animationDelay: `${i * 0.2}s` }}
               >
                 <div className="text-4xl mb-4 group-hover:animate-bounce transition-all duration-300">{stat.icon}</div>
-                <h3 className="font-display text-xl mb-3 text-foreground">{stat.title}</h3>
-                <p className="text-muted-foreground font-body">{stat.desc}</p>
+                <h3 className="font-inter text-xl mb-3 text-foreground">{stat.title}</h3>
+                <p className="text-muted-foreground font-inter">{stat.desc}</p>
               </div>
             ))}
           </div>
@@ -130,8 +130,8 @@ export function WebVersion({ onBack }: WebVersionProps) {
           <div className="text-center mt-16 fade-in-up" style={{ animationDelay: '0.8s' }}>
             <div className="glass-card max-w-lg mx-auto">
               <div className="text-4xl mb-6">🚀</div>
-              <h3 className="text-3xl font-display gradient-text mb-4">Ready to Elevate?</h3>
-              <p className="text-muted-foreground mb-8 font-body leading-relaxed">
+              <h3 className="text-3xl font-hanken gradient-text mb-4">Ready to Elevate?</h3>
+              <p className="text-muted-foreground mb-8 font-inter leading-relaxed">
                 Install our Chrome extension and bring this magic to every website, 
                 email, and document you work with.
               </p>
@@ -141,7 +141,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
                   <Sparkles className="w-5 h-5 icon-thin group-hover:animate-spin" />
                 </span>
               </button>
-              <p className="text-xs text-muted-foreground-secondary mt-4 font-body">
+              <p className="text-xs text-muted-foreground-secondary mt-4 font-inter">
                 Free installation • Works everywhere • Instant access
               </p>
             </div>
@@ -149,20 +149,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
         </div>
       </main>
 
-      {/* Enhanced Floating Action */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <div className="relative group">
-          <button className="w-16 h-16 rounded-full bg-gradient-to-r from-accent to-accent-secondary text-white shadow-glow-accent animate-glow-pulse">
-            <Sparkles className="w-8 h-8 mx-auto icon-thin" />
-          </button>
-          <div className="absolute -top-2 -right-2 w-7 h-7 bg-primary rounded-full flex items-center justify-center text-white text-xs font-bold animate-bounce shadow-glow">
-            NEW
-          </div>
-          <div className="absolute -bottom-12 right-0 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs text-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
-            Try the magic!
-          </div>
-        </div>
-      </div>
+
 
     </div>
   );

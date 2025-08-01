@@ -37,6 +37,7 @@ export function BeforeAfterResults() {
   const [showComparison, setShowComparison] = useState(false);
   const [sliderStyle, setSliderStyle] = useState({});
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [animatedValues, setAnimatedValues] = useState<{[key: string]: number}>({});
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -82,6 +83,48 @@ export function BeforeAfterResults() {
         transform: `translateX(${activeButton.offsetLeft - 8}px)`
       });
     }
+  }, [activeExample]);
+
+  useEffect(() => {
+    const animateNumbers = () => {
+      const currentExample = promptExamples[activeExample];
+      const metrics = currentExample.metrics;
+      
+      // Reset to 0 first
+      setAnimatedValues({});
+      
+      // Animate each metric after a short delay
+      setTimeout(() => {
+        Object.entries(metrics).forEach(([key, value], index) => {
+          const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
+          
+          // Animate from 0 to target value
+          gsap.to({}, {
+            duration: 2,
+            onUpdate: function() {
+              const progress = this.progress();
+              const currentValue = Math.floor(numericValue * progress);
+              setAnimatedValues(prev => ({
+                ...prev,
+                [key]: currentValue
+              }));
+            },
+            delay: index * 0.3,
+            ease: "power2.out"
+          });
+        });
+      }, 100);
+    };
+
+    // Initial animation
+    animateNumbers();
+
+    // Set up infinite loop with 5-second pauses
+    const interval = setInterval(() => {
+      animateNumbers();
+    }, 7000); // Total cycle: 2s animation + 5s pause
+
+    return () => clearInterval(interval);
   }, [activeExample]);
 
   const handleCopy = async (text: string, type: 'before' | 'after') => {
@@ -226,16 +269,12 @@ export function BeforeAfterResults() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.entries(currentExample.metrics).map(([key, value], index) => {
                 const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
-                const { count } = useCounter({
-                  end: numericValue,
-                  duration: 2000,
-                  delay: index * 300
-                });
+                const animatedValue = animatedValues[key] || 0;
                 
                 return (
                   <div key={key} className="text-center">
                     <div className="text-3xl font-bold gradient-text mb-2">
-                      +{Math.floor(count)}%
+                      +{animatedValue}%
                     </div>
                     <div className="text-sm text-muted-foreground capitalize">
                       {key} Improvement
@@ -245,17 +284,6 @@ export function BeforeAfterResults() {
               })}
             </div>
           </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <button className="btn-premium group">
-            <span className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 group-hover:animate-spin" />
-              Transform Your Text Now
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </button>
         </div>
       </div>
     </section>

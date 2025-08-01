@@ -32,33 +32,34 @@ const TONES: Tone[] = [
     prompt: 'Rewrite this text in a warm, friendly, and conversational tone. Make it approachable and engaging while maintaining clarity.'
   },
   {
-    id: 'casual',
-    name: 'Casual',
-    description: 'Relaxed, informal, and easy-going',
-    icon: '👋',
-    prompt: 'Rewrite this text in a casual, relaxed, and informal tone. Make it sound natural and easy-going like talking to a friend.'
-  },
-  {
-    id: 'persuasive',
-    name: 'Persuasive',
-    description: 'Compelling, convincing, and motivating',
-    icon: '🎯',
-    prompt: 'Rewrite this text in a persuasive and compelling tone. Make it convincing and motivating to encourage action or agreement.'
-  },
-  {
-    id: 'concise',
-    name: 'Concise',
-    description: 'Brief, direct, and to-the-point',
-    icon: '⚡',
-    prompt: 'Rewrite this text to be concise, brief, and direct. Remove unnecessary words while preserving all important information.'
-  },
-  {
-    id: 'creative',
-    name: 'Creative',
-    description: 'Imaginative, expressive, and engaging',
-    icon: '🎨',
-    prompt: 'Rewrite this text in a creative, imaginative, and expressive way. Make it more engaging and interesting while keeping the core message.'
+    id: 'technical',
+    name: 'Technical',
+    description: 'Precise, analytical, and domain-specific',
+    icon: '🧑🏻‍💻',
+    prompt: 'Rewrite this text using technical terminology and precise language. Make it suitable for expert audiences with domain-specific knowledge.'
   }
+  // Commented out unused blocks as requested
+  // {
+  //   id: 'persuasive',
+  //   name: 'Persuasive',
+  //   description: 'Compelling, convincing, and motivating',
+  //   icon: '🎯',
+  //   prompt: 'Rewrite this text in a persuasive and compelling tone. Make it convincing and motivating to encourage action or agreement.'
+  // },
+  // {
+  //   id: 'concise',
+  //   name: 'Concise',
+  //   description: 'Brief, direct, and to-the-point',
+  //   icon: '⚡',
+  //   prompt: 'Rewrite this text to be concise, brief, and direct. Remove unnecessary words while preserving all important information.'
+  // },
+  // {
+  //   id: 'creative',
+  //   name: 'Creative',
+  //   description: 'Imaginative, expressive, and engaging',
+  //   icon: '🎨',
+  //   prompt: 'Rewrite this text in a creative, imaginative, and expressive way. Make it more engaging and interesting while keeping the core message.'
+  // }
 ];
 
 export function TextRewriter() {
@@ -118,11 +119,8 @@ export function TextRewriter() {
     setOutputText('');
   };
 
-  const swapTexts = () => {
-    if (outputText) {
-      setInputText(outputText);
-      setOutputText('');
-    }
+  const clearInput = () => {
+    setInputText('');
   };
 
   return (
@@ -167,13 +165,14 @@ export function TextRewriter() {
           />
           <div className="flex gap-2">
             <Button
-              onClick={resetText}
+              onClick={clearInput}
               variant="outline"
               size="sm"
               className="flex-1"
+              disabled={!inputText}
             >
               <RotateCcw className="h-4 w-4 mr-2" />
-              Clear
+              Clear Input
             </Button>
             <Button
               onClick={() => copyToClipboard(inputText)}
@@ -191,7 +190,7 @@ export function TextRewriter() {
         {/* Output */}
         <Card className="p-6 space-y-4 elevated-card">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">Rewritten Text</h3>
+            <h3 className="text-lg font-semibold">AI Enhanced Text</h3>
             <div className="flex items-center gap-2">
               {outputText && (
                 <Badge variant="default" className="text-xs">
@@ -222,7 +221,9 @@ export function TextRewriter() {
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
                 <div className="text-center space-y-2">
-                  <Wand2 className="h-12 w-12 mx-auto opacity-50" />
+                  <div className="relative">
+                    <Wand2 className="h-12 w-12 mx-auto opacity-50 animate-pulse" />
+                  </div>
                   <p>Your rewritten text will appear here</p>
                 </div>
               </div>
@@ -230,14 +231,14 @@ export function TextRewriter() {
           </div>
           <div className="flex gap-2">
             <Button
-              onClick={swapTexts}
+              onClick={() => setOutputText('')}
               variant="outline"
               size="sm"
               className="flex-1"
               disabled={!outputText}
             >
               <RotateCcw className="h-4 w-4 mr-2" />
-              Use as Input
+              Clear Output
             </Button>
             <Button
               onClick={() => copyToClipboard(outputText)}
