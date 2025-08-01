@@ -63,7 +63,7 @@ export function WebVersion({ onBack }: WebVersionProps) {
                 <Sparkles className="w-5 h-5 icon-thin animate-pulse" />
                 <span className="text-sm font-medium font-sans">Web Experience</span>
               </div>
-              <div className="gradient-text text-3xl font-display">Prompt10X</div>
+              <div className="gradient-text text-3xl font-hanken">Prompt10X</div>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -83,11 +83,11 @@ export function WebVersion({ onBack }: WebVersionProps) {
             <span className="text-accent font-medium font-sans">Experience for FREE</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-display gradient-text mb-6">
+          <h1 className="text-5xl md:text-6xl font-hanken gradient-text mb-6">
             Pure Magic ✨
           </h1>
           
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-body leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-inter leading-relaxed">
             No registration, no limits, no friction. Simply paste your text and witness 
             the transformation happen in real-time with our advanced AI engine.
           </p>
