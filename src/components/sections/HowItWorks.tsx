@@ -10,7 +10,7 @@ const steps = [
     id: 1,
     icon: <Upload className="w-8 h-8" />,
     title: 'Input Your Text',
-    description: 'Paste or type your existing text into our intelligent editor. Our AI immediately begins analyzing structure, clarity, and potential improvements.',
+    description: 'Paste your text into our editor. AI instantly analyzes structure and identifies areas for improvement.',
     color: 'from-blue-500 to-cyan-500',
     delay: 0
   },
@@ -18,7 +18,7 @@ const steps = [
     id: 2,
     icon: <Wand2 className="w-8 h-8" />,
     title: 'AI Enhancement Magic',
-    description: 'Our advanced AI engine applies proven text optimization techniques, enhancing for clarity, context, and specific outcomes.',
+    description: 'Our AI applies optimization techniques to enhance clarity, context, and achieve specific outcomes.',
     color: 'from-purple-500 to-pink-500',
     delay: 0.2
   },
@@ -26,7 +26,7 @@ const steps = [
     id: 3,
     icon: <CheckCircle className="w-8 h-8" />,
     title: 'Review & Refine',
-    description: 'See side-by-side comparisons, understand the improvements, and make final adjustments with AI-guided suggestions.',
+    description: 'Compare before and after versions. Make final adjustments with AI-guided suggestions.',
     color: 'from-green-500 to-emerald-500',
     delay: 0.4
   },
@@ -34,7 +34,7 @@ const steps = [
     id: 4,
     icon: <Download className="w-8 h-8" />,
     title: 'Deploy & Succeed',
-    description: 'Copy your enhanced text and watch as it delivers significantly better, more precise results than ever before.',
+    description: 'Copy your enhanced text and achieve significantly better results than ever before.',
     color: 'from-orange-500 to-red-500',
     delay: 0.6
   }
@@ -152,7 +152,7 @@ export function HowItWorks() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-semibold text-foreground mb-4">
+                  <h3 className="text-lg font-semibold text-foreground mb-4 leading-tight">
                     {step.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -160,11 +160,14 @@ export function HowItWorks() {
                   </p>
 
                   {/* Progress Indicator */}
-                  <div className="mt-6 flex justify-center">
-                    <div className="w-full bg-muted rounded-full h-2">
+                  <div className="mt-6">
+                    <div className="w-full bg-muted rounded-full h-2 relative overflow-hidden">
                       <div 
-                        className={`h-2 bg-gradient-to-r ${step.color} rounded-full transition-all duration-1000`}
-                        style={{ width: `${(step.id / steps.length) * 100}%` }}
+                        className={`h-2 bg-gradient-to-r ${step.color} rounded-full`}
+                        style={{ 
+                          width: '0%',
+                          animation: `progressFill${step.id} 2s ease-out ${index * 0.3 + 1}s forwards`
+                        }}
                       />
                     </div>
                   </div>
@@ -174,22 +177,7 @@ export function HowItWorks() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 bg-gradient-to-r from-surface/80 to-surface-elevated/80 backdrop-blur-xl border border-border/50 rounded-2xl p-6">
-            <div className="text-left">
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                Ready to transform your text?
-              </h3>
-              <p className="text-muted-foreground">
-                Join thousands of professionals getting better results
-              </p>
-            </div>
-            <button className="btn-premium shrink-0">
-              Start Free Trial
-            </button>
-          </div>
-        </div>
+
       </div>
     </section>
   );
