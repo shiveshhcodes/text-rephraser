@@ -156,7 +156,7 @@
   }
 
   body {
-    font-family: 'Inter', 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', 'Satoshi', 'Hanken Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.7;
     font-weight: 400;
     letter-spacing: -0.01em;
@@ -175,15 +175,15 @@
 
   /* Premium Typography System */
   .text-hero {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Hanken Grotesk', sans-serif;
     font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.05;
     letter-spacing: -0.04em;
   }
 
   .text-subtitle {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Satoshi', sans-serif;
     font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     font-weight: 400;
     line-height: 1.6;
@@ -192,8 +192,8 @@
   }
 
   .text-display {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.2;
   }
@@ -202,6 +202,19 @@
     font-family: 'Inter', sans-serif;
     line-height: 1.7;
     letter-spacing: -0.01em;
+  }
+
+  /* Font Utility Classes */
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-satoshi {
+    font-family: 'Satoshi', sans-serif;
+  }
+  
+  .font-hanken {
+    font-family: 'Hanken Grotesk', sans-serif;
   }
 
   /* Gradient Text with Shimmer */
@@ -228,7 +241,7 @@
     background: var(--gradient-cta);
     border: none;
     color: hsl(var(--primary-foreground));
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Satoshi', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     padding: 1rem 2.5rem;
@@ -270,7 +283,7 @@
     background: hsl(var(--surface) / 0.8);
     border: 1px solid hsl(var(--border));
     color: hsl(var(--foreground));
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Satoshi', sans-serif;
     font-weight: 500;
     font-size: 0.9rem;
     padding: 0.875rem 1.75rem;
@@ -583,7 +596,7 @@
     background: var(--gradient-cta);
     border: none;
     color: hsl(var(--primary-foreground));
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Satoshi', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     padding: 1rem 2rem;
@@ -625,7 +638,7 @@
     background: var(--gradient-cta);
     border: none;
     color: hsl(var(--primary-foreground));
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Satoshi', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     padding: 1rem 2rem;
@@ -755,5 +768,34 @@
     50% {
       opacity: 1;
     }
+  }
+
+  @keyframes progressFill {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes progressFill1 {
+    from { width: 0%; }
+    to { width: 25%; }
+  }
+
+  @keyframes progressFill2 {
+    from { width: 0%; }
+    to { width: 50%; }
+  }
+
+  @keyframes progressFill3 {
+    from { width: 0%; }
+    to { width: 75%; }
+  }
+
+  @keyframes progressFill4 {
+    from { width: 0%; }
+    to { width: 100%; }
   }
 }
