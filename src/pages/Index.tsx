@@ -61,14 +61,14 @@ const Index = () => {
         <div className="container-premium">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
-              <h1 className="text-2xl font-display gradient-text font-semibold">
+              <h1 className="text-2xl font-hanken gradient-text font-semibold">
                 Prompt10X
               </h1>
               <div className="hidden md:flex items-center gap-6">
-                <a href="#file-system" className="nav-link text-sm">Features</a>
-                <a href="#how-it-works" className="nav-link text-sm">How It Works</a>
-                <a href="#before-after" className="nav-link text-sm">Results</a>
-                <a href="#why-choose" className="nav-link text-sm">Why Choose</a>
+                <a href="#file-system" className="nav-link text-sm font-satoshi">Features</a>
+                <a href="#how-it-works" className="nav-link text-sm font-satoshi">How It Works</a>
+                <a href="#before-after" className="nav-link text-sm font-satoshi">Results</a>
+                <a href="#why-choose" className="nav-link text-sm font-satoshi">Why Choose</a>
               </div>
             </div>
             
@@ -76,13 +76,13 @@ const Index = () => {
               <div className="hidden md:flex items-center gap-3">
                 <button
                   onClick={handleTryWebVersion}
-                  className="btn-secondary text-sm"
+                  className="btn-secondary text-sm font-satoshi"
                 >
                   Try Free
                 </button>
                 <button
                   onClick={handleInstallClick}
-                  className="btn-premium text-sm px-6 py-3"
+                  className="btn-premium text-sm px-6 py-3 font-satoshi"
                 >
                   <Chrome className="w-4 h-4 mr-2" />
                   Install Extension
@@ -128,8 +128,11 @@ const Index = () => {
               <span className="text-sm font-medium text-accent">AI-Powered Text Enhancement</span>
             </div>
 
-            <h1 className="text-hero gradient-text mb-8 font-display">
-              Transform Your Text with AI
+            <h1 className="text-hero gradient-text mb-8 font-inter">
+              <div className="block text-4xl md:text-6xl">Transform Your Text With</div>
+              <div className="block text-5xl md:text-8xl font-bold bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent mt-2">
+                AI
+              </div>
             </h1>
             
             <p className="text-subtitle text-muted-foreground mb-12 max-w-3xl mx-auto">
@@ -140,7 +143,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <button
                 onClick={handleTryWebVersion}
-                className="btn-premium text-lg px-10 py-4 group shadow-glow"
+                className="btn-premium text-lg px-10 py-4 group shadow-glow font-satoshi"
               >
                 <span className="flex items-center gap-3">
                   <Sparkles className="w-5 h-5 group-hover:animate-spin" />
@@ -151,7 +154,7 @@ const Index = () => {
 
               <button 
                 onClick={handleInstallClick} 
-                className="btn-secondary px-8 py-4 text-lg group"
+                className="btn-secondary px-8 py-4 text-lg group font-satoshi"
               >
                 <span className="flex items-center gap-2">
                   <Chrome className="w-5 h-5" />
@@ -186,21 +189,29 @@ const Index = () => {
       <WhyChoose />
 
       {/* Premium Footer */}
-      <footer className="navbar-glass section-padding">
+      <footer className="navbar-glass section-padding bg-gradient-to-br from-surface/20 via-background to-surface/20">
         <div className="container-premium text-center">
-          <h3 className="text-2xl font-display gradient-text mb-4">Prompt10X</h3>
-          <p className="text-muted-foreground mb-8">Transform your content workflow with professional-grade text enhancement</p>
-          
-          <div className="flex justify-center gap-8 text-sm mb-6">
-            <a href="#" className="nav-link">About</a>
-            <a href="#" className="nav-link">Privacy</a>
-            <a href="#" className="nav-link">Terms</a>
-            <button onClick={handleInstallClick} className="nav-link text-accent">Chrome Extension</button>
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-3xl font-hanken gradient-text mb-6">Prompt10X</h3>
+            <p className="text-lg text-muted-foreground mb-8 font-inter leading-relaxed">
+              Transform your content workflow with professional-grade text enhancement
+            </p>
+            
+            <div className="flex justify-center gap-8 text-sm mb-8">
+              <a href="#" className="nav-link font-satoshi hover:text-accent transition-colors duration-300">About</a>
+              <a href="#" className="nav-link font-satoshi hover:text-accent transition-colors duration-300">Privacy</a>
+              <a href="#" className="nav-link font-satoshi hover:text-accent transition-colors duration-300">Terms</a>
+              <button onClick={handleInstallClick} className="nav-link text-accent font-satoshi hover:text-primary transition-colors duration-300">
+                Chrome Extension
+              </button>
+            </div>
+            
+            <div className="border-t border-border/30 pt-6">
+              <p className="text-sm text-muted-foreground font-inter">
+                © 2024 Prompt10X. Crafted with precision for content professionals.
+              </p>
+            </div>
           </div>
-          
-          <p className="text-xs text-muted-foreground">
-            © 2024 Prompt10X. Crafted with precision for content professionals.
-          </p>
         </div>
       </footer>
     </div>
