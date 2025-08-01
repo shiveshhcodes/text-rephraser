@@ -51,6 +51,9 @@ const comparisonData = [
 export function WhatMakesDifferent() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<'features' | 'comparison'>('features');
+  const [sliderStyle, setSliderStyle] = useState({});
+  const featuresRef = useRef<HTMLButtonElement>(null);
+  const comparisonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -95,6 +98,20 @@ export function WhatMakesDifferent() {
     return () => ctx.revert();
   }, [activeTab]);
 
+  useEffect(() => {
+    if (activeTab === 'features' && featuresRef.current) {
+      setSliderStyle({
+        width: featuresRef.current.offsetWidth,
+        transform: `translateX(${featuresRef.current.offsetLeft - 8}px)`
+      });
+    } else if (activeTab === 'comparison' && comparisonRef.current) {
+      setSliderStyle({
+        width: comparisonRef.current.offsetWidth,
+        transform: `translateX(${comparisonRef.current.offsetLeft - 8}px)`
+      });
+    }
+  }, [activeTab]);
+
   return (
     <section id="what-makes-different" className="section-padding bg-gradient-to-br from-background via-surface/20 to-background">
       <div className="container-premium" ref={containerRef}>
@@ -110,22 +127,29 @@ export function WhatMakesDifferent() {
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-12">
-          <div className="bg-surface/50 backdrop-blur-xl border border-border/50 rounded-2xl p-2">
+          <div className="bg-surface/50 backdrop-blur-xl border border-border/50 rounded-2xl p-2 relative">
+            {/* Sliding Background */}
+            <div 
+              className="absolute top-2 bottom-2 bg-gradient-to-r from-accent to-primary rounded-xl transition-all duration-300 ease-out shadow-lg"
+              style={sliderStyle}
+            />
             <button
+              ref={featuresRef}
               onClick={() => setActiveTab('features')}
-              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+              className={`relative px-6 py-3 rounded-xl font-medium transition-all duration-300 z-10 ${
                 activeTab === 'features'
-                  ? 'bg-gradient-to-r from-accent to-primary text-white shadow-lg'
+                  ? 'text-white font-semibold'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               Key Features
             </button>
             <button
+              ref={comparisonRef}
               onClick={() => setActiveTab('comparison')}
-              className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+              className={`relative px-6 py-3 rounded-xl font-medium transition-all duration-300 z-10 ${
                 activeTab === 'comparison'
-                  ? 'bg-gradient-to-r from-accent to-primary text-white shadow-lg'
+                  ? 'text-white font-semibold'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
