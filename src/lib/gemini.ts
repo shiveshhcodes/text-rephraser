@@ -1,51 +1,35 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { Tone } from '@/components/TextRewriter';
 
-// For demo purposes, we'll use a mock implementation
-// In production, you would set up your API key properly
-const DEMO_API_KEY = 'demo-key-replace-with-real-key';
-
-let genAI: GoogleGenerativeAI | null = null;
-
-try {
-  if (DEMO_API_KEY !== 'demo-key-replace-with-real-key') {
-    genAI = new GoogleGenerativeAI(DEMO_API_KEY);
-  }
-} catch (error) {
-  console.log('Gemini API not configured - using demo mode');
-}
-
-export async function rewriteText(text: string, tone: Tone): Promise<string> {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 2000));
-
-  // For demo purposes, return a mock rewrite
-  // In production, you would use the actual Gemini API
-  if (!genAI) {
-    return generateMockRewrite(text, tone);
-  }
+export const rewriteText = async (
+  text: string,
+  tone: Tone
+): Promise<string> => {
+  // The URL of your new backend server
+  const backendUrl = 'http://localhost:5001/api/v1/rewrite';
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const response = await fetch(backendUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text, tone: tone.id }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Backend request failed');
+    }
+
+    const data = await response.json();
+    return data.rewrittenText;
     
-    const prompt = `${tone.prompt}
-
-Original text: "${text}"
-
-Instructions:
-- Rewrite ONLY, do not add explanations or chat
-- Maintain the core meaning and information
-- Apply the specified tone consistently
-- Return only the rewritten text, nothing else`;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    return response.text().trim();
   } catch (error) {
-    console.error('Gemini API error:', error);
+    console.error("Error calling backend:", error);
+    // Fallback to mock rewrite if backend is unavailable
     return generateMockRewrite(text, tone);
   }
-}
+};
 
 function generateMockRewrite(text: string, tone: Tone): string {
   // Mock rewrite logic for demo
