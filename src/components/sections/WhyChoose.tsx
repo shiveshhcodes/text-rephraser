@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Star, Users, Shield, Zap, TrendingUp, Award, Clock, Target } from 'lucide-react';
 import { gsap } from 'gsap';
+import { useCounter } from '@/hooks/use-counter';
 
 const testimonials = [
   {
@@ -33,10 +34,10 @@ const testimonials = [
 ];
 
 const trustSignals = [
-  { icon: <Users className="w-6 h-6" />, value: "50,000+", label: "Active Users" },
-  { icon: <Star className="w-6 h-6" />, value: "4.9/5", label: "User Rating" },
-  { icon: <Shield className="w-6 h-6" />, value: "99.9%", label: "Uptime" },
-  { icon: <Zap className="w-6 h-6" />, value: "<3s", label: "Processing Time" },
+  { icon: <Users className="w-6 h-6" />, value: 1000, label: "Active Users", suffix: "+" },
+  { icon: <Star className="w-6 h-6" />, value: 4.9, label: "User Rating", suffix: "/5" },
+  { icon: <Shield className="w-6 h-6" />, value: 99.9, label: "Uptime", suffix: "%" },
+  { icon: <Zap className="w-6 h-6" />, value: 3, label: "Processing Time", suffix: "s", prefix: "<" },
 ];
 
 const benefits = [
@@ -148,22 +149,30 @@ export function WhyChoose() {
 
         {/* Trust Signals */}
         <div className="trust-signals grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
-          {trustSignals.map((signal, index) => (
-            <div
-              key={index}
-              className="trust-signal text-center"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-accent to-primary rounded-2xl flex items-center justify-center text-white shadow-lg">
-                {signal.icon}
+          {trustSignals.map((signal, index) => {
+            const { count } = useCounter({
+              end: signal.value,
+              duration: 2000,
+              delay: index * 200
+            });
+            
+            return (
+              <div
+                key={index}
+                className="trust-signal text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-accent to-primary rounded-2xl flex items-center justify-center text-white shadow-lg">
+                  {signal.icon}
+                </div>
+                <div className="text-3xl font-bold gradient-text mb-2">
+                  {signal.prefix || ''}{signal.value === 4.9 ? count.toFixed(1) : Math.floor(count).toLocaleString()}{signal.suffix}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {signal.label}
+                </div>
               </div>
-              <div className="text-3xl font-bold gradient-text mb-2">
-                {signal.value}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                {signal.label}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Benefits Grid */}
