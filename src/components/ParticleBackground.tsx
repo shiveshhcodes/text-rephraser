@@ -24,9 +24,8 @@ export function ParticleBackground() {
   const wordParticlesRef = useRef<WordParticle[]>([]);
   const animationRef = useRef<number>();
 
-  const words = ['Transform', 'Magic', 'Flow', 'Create', 'Inspire', 'Enhance'];
-
   useEffect(() => {
+    const words = ['Transform', 'Magic', 'Flow', 'Create', 'Inspire', 'Enhance'];
     const canvas = canvasRef.current;
     if (!canvas) return;
 

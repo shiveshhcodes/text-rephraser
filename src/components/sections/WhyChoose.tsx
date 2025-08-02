@@ -70,6 +70,33 @@ const benefits = [
 export function WhyChoose() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  
+  // Create separate counters for each trust signal
+  const counter1 = useCounter({
+    end: trustSignals[0].value,
+    duration: 2000,
+    delay: 0
+  });
+  
+  const counter2 = useCounter({
+    end: trustSignals[1].value,
+    duration: 2000,
+    delay: 200
+  });
+  
+  const counter3 = useCounter({
+    end: trustSignals[2].value,
+    duration: 2000,
+    delay: 400
+  });
+  
+  const counter4 = useCounter({
+    end: trustSignals[3].value,
+    duration: 2000,
+    delay: 600
+  });
+  
+  const counters = [counter1, counter2, counter3, counter4];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -150,11 +177,7 @@ export function WhyChoose() {
         {/* Trust Signals */}
         <div className="trust-signals grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {trustSignals.map((signal, index) => {
-            const { count } = useCounter({
-              end: signal.value,
-              duration: 2000,
-              delay: index * 200
-            });
+            const { count } = counters[index];
             
             return (
               <div
