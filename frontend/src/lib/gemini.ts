@@ -4,8 +4,8 @@ export const rewriteText = async (
   text: string,
   tone: Tone
 ): Promise<string> => {
-  // Use environment variable for backend URL, fallback to localhost for development
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+  // Use Render backend URL for production, fallback to localhost for development
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://prompt-10x.onrender.com';
   const apiEndpoint = `${backendUrl}/api/v1/rewrite`;
 
   try {
