@@ -4,9 +4,9 @@ export const rewriteText = async (
   text: string,
   tone: Tone
 ): Promise<string> => {
-  // Use relative URL for Vercel deployment, fallback to localhost for development
+  // Use Render backend URL for production, localhost for development
   const backendUrl = process.env.NODE_ENV === 'production' 
-    ? '/api/v1/rewrite'
+    ? 'https://prompt10x-backend.onrender.com/api/v1/rewrite'
     : 'http://localhost:5001/api/v1/rewrite';
 
   try {
