@@ -4,13 +4,12 @@ export const rewriteText = async (
   text: string,
   tone: Tone
 ): Promise<string> => {
-  // Use Render backend URL for production, fallback to localhost for development
-  const backendUrl = process.env.NODE_ENV === 'production' 
-    ? 'https://your-backend-app-name.onrender.com/api/v1/rewrite'
-    : 'http://localhost:5001/api/v1/rewrite';
+  // Use environment variable for backend URL, fallback to localhost for development
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+  const apiEndpoint = `${backendUrl}/api/v1/rewrite`;
 
   try {
-    const response = await fetch(backendUrl, {
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -7,4 +7,6 @@ services:
     staticPublishPath: ./dist
     envVars:
       - key: NODE_ENV
-        value: production 
+        value: production
+      - key: VITE_BACKEND_URL
+        sync: false 
