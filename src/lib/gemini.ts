@@ -4,8 +4,10 @@ export const rewriteText = async (
   text: string,
   tone: Tone
 ): Promise<string> => {
-  // The URL of your new backend server
-  const backendUrl = 'http://localhost:5001/api/v1/rewrite';
+  // Use relative URL for Vercel deployment, fallback to localhost for development
+  const backendUrl = process.env.NODE_ENV === 'production' 
+    ? '/api/v1/rewrite'
+    : 'http://localhost:5001/api/v1/rewrite';
 
   try {
     const response = await fetch(backendUrl, {
