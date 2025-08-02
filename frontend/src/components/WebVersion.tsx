@@ -67,8 +67,11 @@ export function WebVersion({ onBack }: WebVersionProps) {
             </div>
 
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Heart className="w-4 h-4 text-primary animate-pulse" />
-              <span className="font-satoshi">Created with intent, because it's needed</span>
+              <Heart className="w-2.2 h-4.2 text-primary animate-pulse" />
+              <div className="flex flex-col">
+                <span className="font-satoshi">Created with intent, because it's needed!!</span>
+                <span className="font-satoshi text-xs opacity-80">- Shivesh</span>
+              </div>
             </div>
           </div>
         </div>
@@ -80,10 +83,10 @@ export function WebVersion({ onBack }: WebVersionProps) {
         <div className="text-center mb-16 fade-in-up">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-accent/10 rounded-full mb-8 border border-accent/20">
             <Zap className="w-5 h-5 text-accent icon-thin" />
-            <span className="text-accent font-medium font-sans">Experience for FREE</span>
+            <span className="text-accent font-medium font-sans">No Signup & No Limits</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-hanken gradient-text mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-hanken gradient-text mb-6 leading-tight">
             Pure Magic ✨
           </h1>
           
